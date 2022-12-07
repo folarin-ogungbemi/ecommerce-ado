@@ -1,10 +1,4 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <h1 class="display-2" >Google Login </h1>
-    {% if user.is_authenticated %}
-    <p class="text-success">Hello, {{ user.username }}</p>
-    {% else %}
-    <p class="text-success">Hello there!, please Login </p>
-    {% endif %}
 {% endblock %}

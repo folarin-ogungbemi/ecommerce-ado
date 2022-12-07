@@ -1,48 +1,332 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-{% block meta %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{% endblock %}
+  <head>
+    {% block meta %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% endblock %} {% block extra_meta %} {% endblock %} {% block corecss %}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    {% endblock %} {% block extra_css %} {% endblock %} {% block corejs %}
+    <script
+      src="https://kit.fontawesome.com/b30d404726.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %} {% block extra_js %} {% endblock %}
 
-{% block extra_meta %}
-{% endblock %}
+    <title>Gosip {% block extra_title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header class="container-fluid">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand ps-4 pe-5" href="{% url 'home' %}"
+            ><h1 class="logo">
+              <strong>G<span class="brand-color">o</span></strong
+              >sip
+            </h1></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse mx-auto" id="navbarScroll">
+            <form
+              class="d-flex form-control gosip-search-box rounded-pill ms-5 me-5"
+              role="search"
+            >
+              <input
+                class="gosip-search form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="search-btn me-2" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+            <ul
+              class="d-flex list-unstyled text-center gap-5 ms-5 py-1 my-auto"
+            >
+              <li class="nav-item dropdown fs-6">
+                {% if user.is_authenticated %}
+                <small>Hello, {{user.username}}</small>
+                {% else %}
+                <i class="fa-solid fa-user"></i>
+                {% endif %}
+                <a
+                  class="nav-link dropdown-toggle me-2"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >Account</a
+                >
+                <ul class="dropdown-menu">
+                  {% if user.is_authenticated %}
+                  <li><a class="dropdown-item" href="#">My Orders</a></li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}"
+                      >Logout</a
+                    >
+                  </li>
+                  {% else %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'account_signup' %}"
+                      >Register</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'account_login' %}"
+                      >Login</a
+                    >
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              <li class="nav-item wish-box">
+                <small class="text-danger"
+                  ><strong class="wish-items">0</strong></small
+                >
+                <i class="fa-regular fa-heart"></i>
+                <a class="nav-link me-2" href="#">Wishlist</a>
+              </li>
+              <li class="nav-item cart-box pe-4">
+                <small class="text-danger"
+                  ><strong class="cart-items">0</strong></small
+                >
+                <i class="fa-solid fa-basket-shopping"></i>
+                <a class="nav-link" href="#">Cart</a>
+              </li>
+            </ul>
+          </div>
+          <!--collapse./-->
+        </div>
+      </nav>
+      <nav class="navbar navbar-expand page-links">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6 mx-auto page-links-container">
+              <!--Page Nav-links-->
+              <ul class="navbar-nav mx-auto page-links-content">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active me-5"
+                    aria-current="page"
+                    href="{% url 'home' %}"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-5" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-5" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
+              </ul>
+              <!--/.Page Nav-links-->
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-{% block corecss %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-{% endblock %}
+    <footer class="fixed-bottom">
+      <hr class="border border-danger border-1 opacity-50" />
+      <div
+        class="container-fluid footer-user d-flex justify-content-center my-3"
+      >
+        <div class="row">
+          <div class="col-12">
+            {% if user.is_authenticated %}
+            <h3>Books you have looked up</h3>
+            <!--Browsing History-->
+            {% else %}
+            <div class="d-grid">
+              <a class="btn user-btn" href="{% url 'account_login' %}">Login</a>
+              <span>
+                <small>Are you new here? </small
+                ><a class="d-inline nav-link" href="{% url 'account_signup' %}"
+                  ><small class="user-reg">Register</small></a
+                >
+              </span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid footer-links py-2">
+        <div class="row">
+          <div class="col-3">
+            <!--company-networks-->
+            <div class="social-networks ms-5">
+              <strong>Company</strong>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="{% url 'about' %}" class="nav-link"><small>About</small></a>
+                </li>
+                <li>
+                  <a href="{% url 'contact' %}" class="nav-link"><small>Contact</small></a>
+                </li>
+                <li>
+                  <a href="{% url 'team' %}" class="nav-link"><small>Team</small></a>
+                </li>
+                <li>
+                  <a
+                    href="https://folarin-ogungbemi.github.io/Portfolio-Project-1/"
+                    class="nav-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="visit our Blog page(open in a new tab)"
+                    ><small>Blog</small></a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!--/.company-networks-->
+          </div>
+          <div class="col-3">
+            <!--Sponsor-networks-->
+            <div class="social-networks ms-5">
+              <strong>Sponsors</strong>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#" class="nav-link"><small>Code Institute</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>Python</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>Django</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>Javascript</small></a>
+                </li>
+              </ul>
+            </div>
+            <!--/.Sponsor-networks-->
+          </div>
+          <!--company-col./-->
+          <div class="col-3">
+            <!--Product-networks-->
+            <div class="social-networks">
+              <strong>Books</strong>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#" class="nav-link"><small>Education</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>History</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>Entertainment</small></a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link"><small>Sports</small></a>
+                </li>
+              </ul>
+            </div>
+            <!--/.Product-networks-->
+          </div>
+          <!--Product-col./-->
+          <div class="col-3">
+            <!--social-networks-->
+            <div class="social-networks">
+              <strong>Socials</strong>
+              <ul class="list-unstyled">
+                <li>
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="nav-link"
+                    aria-label="visit our Facebook page(open in a new tab)"
+                    ><small>Facebook</small></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="nav-link"
+                    aria-label="visit our Twitter page(open in a new tab)"
+                    ><small>Twitter</small></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://youtube.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="nav-link"
+                    aria-label="visit our Youtube page(open in a new tab)"
+                    ><small>Youtube</small></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="nav-link"
+                    aria-label="visit our Instagram page(open in a new tab)"
+                    ><small>Instagram</small></a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!--/.social-networks-->
+          </div>
+          <!--follow-links-col./-->
+        </div>
+        <!--row./-->
+      </div>
+      <!--container./-->
+      <!--Copywrite-->
+      <div class="footer-copywrite d-flex justify-content-center">
+        <div class="row">
+          <div class="col-12">
+            <span>
+              <a
+                href="https://github.com/folarin-ogungbemi"
+                target="_blank"
+                rel="noopener"
+                aria-label="visit folarin's github page(open in a new tab)"
+                class="nav-link d-inline"
+                ><small>&copy; 2022 Folarin projects.</small>
+                <i class="fa-brands fa-github"></i></a
+            ></span>
+          </div>
+        </div>
+      </div>
+      <!--Copywrite-->
+    </footer>
 
-{% block extra_css %}
-{% endblock %}
-
-{% block corejs %}
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-{% endblock %}
-
-{% block extra_js %}
-{% endblock %}
-
-<title>Boutique Ado {% block extra_title %}{% endblock %}</title>
-</head>
-<body>
-<header class="container-fluid fixed-top"></header>
-
-{% if messages %}
+    {% if messages %}
     <div class="message-container"></div>
-{% endif %}
-
-{% block page_header %}
-{% endblock %}
-
-{% block content %}
-{% endblock %}
-
-{% block postloadjs %}
-{% endblock %}
-
-</body>
+    {% endif %} {% block page_header %} {% endblock %} {% block content %}
+    {%endblock %} {% block postloadjs %} {% endblock %}
+  </body>
 </html>

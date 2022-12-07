@@ -5,3 +5,18 @@ from django.shortcuts import render
 def index(request):
     """ A view to return the index page """
     return render(request, 'home/index.html')
+
+
+def contact(request):
+    """ A view to return the contact page """
+    return render(request, 'home/contact.html')
+
+
+def about(request):
+    """ A view to return the about page """
+    return render(request, 'home/about.html')
+
+
+def team(request):
+    """ A view to return the team page """
+    return render(request, 'home/team.html')

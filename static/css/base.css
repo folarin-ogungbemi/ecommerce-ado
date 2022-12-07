@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto:wght@300&display=swap');
+
+body {
+    background-color: #fffaf6;
+    /* font-family: 'Roboto', sans-serif; */
+    color: #022138;
+    width: 100%;
+    max-width: 100vw;
+}
+
+header{
+    height: 15vh;
+}
+
+/* .page-links{
+    background-color: #f02c2c;
+    width: 100vw;
+} */
+
+.logo{
+    text-transform: uppercase;
+    color: #022138;
+}
+.brand-color{
+    color: #f02c2c;
+}
+
+.page-links .container-fluid{
+    width: auto;
+}
+
+.page-links-content{
+    justify-content: center;
+}
+
+.page-links-content a:hover,
+.page-links-content .active{
+    border-bottom: 2px solid #f02c2c;
+}
+
+.gosip-search-box{
+    width: 65%;
+    position: relative;
+    border-color: #f02c2c;
+}
+.gosip-search{
+    border: none; 
+}
+.gosip-search:focus{
+    border-color: transparent;
+    box-shadow: none;
+}
+.gosip-search-box .form-control{
+    width: 97%;
+}
+.gosip-search:focus-visible{
+    outline: none;
+}
+.search-btn{
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    padding: 0.375em 0.75em;
+    border-radius: 50%; 
+    color:  #f02c2c;
+}
+
+.cart-box,
+.wish-box{
+    position: relative;
+}
+.cart-items{
+    position: absolute;
+    right: 40%;
+    top: 10%;
+    line-height: 0;
+    font-size: 1rem;
+}
+
+.wish-items{
+    position: absolute;
+    right: 23%;
+    top: 10%;
+    font-size: 1rem;
+}
+
+.fa-heart,
+.fa-basket-shopping{
+    font-size: 1.3rem;
+}
+
+/* ******
+    PAGE
+******** */
+.page{
+    margin-top: 10vh;
+    min-height: 100vh;
+}
+
+.contact-page{
+    background-color: #022138;
+    color: #fffaf6;
+    height: 40vh;
+    position: relative;
+}
+
+.fa-location-dot,
+.fa-phone,
+.fa-envelope{
+    color: #f02c2c;
+}
+
+.contact-form{
+    z-index: 5;
+    position: absolute;
+    bottom: 25%;
+    left: 5%;
+    border-color: transparent;
+    box-shadow: 2px 3px 15px 1px rgba(2, 33, 56, 0.5);
+}
+
+/* *********
+    FOOTER
+******** ***/
+.footer-user{
+    color:#022138;
+}
+.footer-user .user-reg{
+    color: #f02c2c;
+}
+.user-btn{
+    background-color:rgba(2, 33, 56, 0.9);
+    color: #fffaf6;
+}
+.user-btn:hover{
+    background-color: #022138;
+    color: #fffaf6;
+}
+.footer-links{
+    background-color:rgba(2, 33, 56, 0.9);
+    color: #fffaf6;
+}
+
+.footer-links a:hover,
+.footer-copywrite a:hover,
+.about a:hover{
+    color: #f02c2c;
+}
+
+.footer-copywrite{
+    background-color:#022138;
+    color: #fffaf6;
+}
+
+/* *****
+ ABOUT
+****** */
+
+.about-page{
+    background-image: url(../images/book-lovers.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fffaf6;
+    height: 40vh;
+    position: relative;
+}
+
+.about-text{
+    z-index: 5;
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+    border-color: transparent;
+    box-shadow: 2px 3px 15px 1px rgba(2, 33, 56, 0.5);
+}   
