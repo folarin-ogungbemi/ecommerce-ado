@@ -28,27 +28,14 @@
     <title>Gosip {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-    <header class="container-fluid">
-      <nav class="navbar navbar-expand-lg">
+    <header>
+      <nav class="navbar navbar-light page-nav fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand ps-4 pe-5" href="{% url 'home' %}"
-            ><h1 class="logo">
-              <strong>G<span class="brand-color">o</span></strong
-              >sip
-            </h1></a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse mx-auto" id="navbarScroll">
+          <a class="navbar-brand" href="{% url 'home' %}"><h1 class="logo"><strong>G<span class="brand-color">o</span></strong>sip Bookstore</h1></a>
+          <div class="navbar navbar-expand d-none d-md-flex">
             <form
               class="d-flex form-control gosip-search-box rounded-pill ms-5 me-5"
               role="search"
@@ -118,67 +105,75 @@
               </li>
             </ul>
           </div>
-          <!--collapse./-->
-        </div>
-      </nav>
-      <nav class="navbar navbar-expand page-links">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-6 mx-auto page-links-container">
-              <!--Page Nav-links-->
-              <ul class="navbar-nav mx-auto page-links-content">
+          <!--./-->
+          <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <a class="navbar-brand ps-4" href="{% url 'home' %}"><h3 class="logo"><strong>G<span class="brand-color">o</span></strong>sip Bookstore</h3></a>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a
-                    class="nav-link active me-5"
-                    aria-current="page"
-                    href="{% url 'home' %}"
-                    >Home</a
-                  >
+                  <a class="nav-link ps-4 trans-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-5" href="#">Products</a>
+                  <a class="nav-link ps-4 trans-link" href="#">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-5" href="{% url 'about' %}">About</a>
+                  <a class="nav-link ps-4 trans-link" href="{% url 'about' %}">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                  <a class="nav-link ps-4 trans-link" href="{% url 'contact' %}">Contact</a>
                 </li>
               </ul>
-              <!--/.Page Nav-links-->
+              <div class="d-grid mt-4">
+                {% if user.is_authenticated %}
+                <a class="btn btn1 rounded-pill" href="{% url 'account_logout' %}">Logout</a>
+                {% else %}
+                <a class="btn btn1 rounded-pill" href="{% url 'account_login' %}">Login</a>
+                <a class="btn btn2 rounded-pill mt-2" href="{% url 'account_signup' %}">Register</a>
+                {% endif %}
+              </div>
             </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <footer class="fixed-bottom">
-      <hr class="border border-danger border-1 opacity-50" />
-      <div
-        class="container-fluid footer-user d-flex justify-content-center my-3"
-      >
-        <div class="row">
-          <div class="col-12">
-            {% if user.is_authenticated %}
-            <h3>Books you have looked up</h3>
-            <!--Browsing History-->
-            {% else %}
-            <div class="d-grid">
-              <a class="btn user-btn" href="{% url 'account_login' %}">Login</a>
-              <span>
-                <small>Are you new here? </small
-                ><a class="d-inline nav-link" href="{% url 'account_signup' %}"
-                  ><small class="user-reg">Register</small></a
-                >
-              </span>
-            </div>
-            {% endif %}
           </div>
         </div>
       </div>
+      </nav>
+    </header>
+
+
+    {% if messages %}
+    <div class="message-container"></div>
+    {% endif %} {% block page_header %} {% endblock %}
+
+    {% block content %}
+    {%endblock %}
+
+    <div class="navbar navbar-expand d-flex d-md-none fixed-bottom media-link">
+      <ul class="navbar-nav flex-grow-1 justify-content-around">
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="#"><i class="fa-solid fa-user"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="#"><i class="fa-regular fa-heart"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!--nav-links./-->
+
+    <footer class="">
       <div class="container-fluid footer-links py-2">
         <div class="row">
-          <div class="col-3">
+          <div class="col-6 col-md-3">
             <!--company-networks-->
             <div class="social-networks ms-5">
               <strong>Company</strong>
@@ -206,31 +201,56 @@
             </div>
             <!--/.company-networks-->
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3">
             <!--Sponsor-networks-->
             <div class="social-networks ms-5">
               <strong>Sponsors</strong>
               <ul class="list-unstyled">
                 <li>
-                  <a href="#" class="nav-link"><small>Code Institute</small></a>
+                  <a
+                    href="https://codeinstitute.net/"
+                    class="nav-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="visit our Code Institute page(open in a new tab)"
+                   ><small>Code Institute</small></a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link"><small>Python</small></a>
+                  <a
+                  href="https://www.python.org/"
+                  class="nav-link"
+                  href="https://codeinstitute.net/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="visit our Python page(open in a new tab)"
+                  ><small>Python</small></a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link"><small>Django</small></a>
+                  <a
+                  href="https://www.djangoproject.com/"
+                  class="nav-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="visit our Django page(open in a new tab)"
+                  ><small>Django</small></a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link"><small>Javascript</small></a>
+                  <a
+                  href="https://www.javascript.com/"
+                  class="nav-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="visit our Javascript page(open in a new tab)"
+                  ><small>Javascript</small></a>
                 </li>
               </ul>
             </div>
             <!--/.Sponsor-networks-->
           </div>
           <!--company-col./-->
-          <div class="col-3">
+          <div class="col-6 col-md-3">
             <!--Product-networks-->
-            <div class="social-networks">
+            <div class="social-networks ms-5">
               <strong>Books</strong>
               <ul class="list-unstyled">
                 <li>
@@ -250,9 +270,9 @@
             <!--/.Product-networks-->
           </div>
           <!--Product-col./-->
-          <div class="col-3">
+          <div class="col-6 col-md-3">
             <!--social-networks-->
-            <div class="social-networks">
+            <div class="social-networks ms-5">
               <strong>Socials</strong>
               <ul class="list-unstyled">
                 <li>
@@ -324,9 +344,6 @@
       <!--Copywrite-->
     </footer>
 
-    {% if messages %}
-    <div class="message-container"></div>
-    {% endif %} {% block page_header %} {% endblock %} {% block content %}
-    {%endblock %} {% block postloadjs %} {% endblock %}
+    {% block postloadjs %} {% endblock %}
   </body>
 </html>

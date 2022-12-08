@@ -1,4 +1,91 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <div class="container page">
+        <div class="row">
+            <div class="col-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item hero-1 active">
+                        <div class="container card page-call">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Learning remains a part of our growth.</p>
+                                </div>
+                                <div class="col-12">
+                                    <a class="btn btn-danger rounded-pill" href="{% url 'home' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--hero1./-->
+                      </div>
+                      <div class="carousel-item hero-2">
+                        <div class="container card page-call">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Learning remains a part of our growth.</p>
+                                </div>
+                                <div class="col-12">
+                                    <a class="btn btn-danger rounded-pill" href="{% url 'home' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--hero2./-->
+                      </div>
+                      <div class="carousel-item hero-3">
+                        <div class="container card page-call">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Learning remains a part of our growth.</p>
+                                </div>
+                                <div class="col-12">
+                                    <a class="btn btn-danger rounded-pill" href="{% url 'home' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--hero3./-->
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!--carousel./-->
+    <div class="browse-history">
+        <hr class="border border-danger border-1 opacity-50">
+      <div
+        class="container-fluid footer-user d-flex justify-content-center my-3"
+      >
+        <div class="row">
+          <div class="col-12">
+            {% if user.is_authenticated %}
+            <h3>Books you have looked up</h3>
+            <!--Browsing History-->
+            {% else %}
+            <div class="d-grid">
+              <a class="btn user-btn rounded-pill" href="{% url 'account_login' %}">Login</a>
+              <span>
+                <small>Are you new here? </small
+                ><a class="d-inline nav-link" href="{% url 'account_signup' %}"
+                  ><small class="user-reg">Register</small></a>
+              </span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
